@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<manifest xmlns:a='http://schemas.android.com/apk/res/android' 
+    package='com.tomas.game'
+    a:versionCode='0'
+    a:versionName='0'>
+    <uses-sdk
+        a:minSdkVersion="29"
+        a:targetSdkVersion="29"/>
+    <application
+        a:label='Game in C'>
+        <activity
+            a:name='com.tomas.game.MainActivity'
+            a:exported="true">
+            <intent-filter>
+                <category a:name='android.intent.category.LAUNCHER'/>
+                <action a:name='android.intent.action.MAIN'/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
