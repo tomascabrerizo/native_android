@@ -1,5 +1,6 @@
 package com.tomas.game;
 
+import android.content.res.AssetManager;
 import android.opengl.GLSurfaceView.Renderer;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -7,7 +8,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 class GameRenderer implements Renderer {
 
-    public native void gpuInit();
+    public native void gpuInit(AssetManager assetManager);
 
     public native void gpuRender();
 
@@ -17,10 +18,15 @@ class GameRenderer implements Renderer {
 
     private static final double NANOS_PER_SECOND = 1000000000.0;
     private double lastTime;
+    AssetManager assetManager;
+
+    public GameRenderer(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        gpuInit();
+        gpuInit(assetManager);
     }
 
     @Override

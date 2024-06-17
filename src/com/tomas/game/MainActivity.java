@@ -51,7 +51,7 @@ class GameView extends GLSurfaceView {
         setEGLContextClientVersion(3);
         setEGLConfigChooser(8, 8, 8, 8, 24, 8);
 
-        renderer = new GameRenderer();
+        renderer = new GameRenderer(context.getAssets());
         setRenderer(renderer);
 
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);

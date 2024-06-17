@@ -50,7 +50,7 @@ set ARCH=arm64-v8a
 set SONAME=-Wl,-soname,%TARGET%
 set CC=%NDK%/toolchains\llvm\prebuilt\windows-x86_64\bin\clang
 set CFLAGS=-pedantic -Wall -Wextra -Werror -std=c11 -g -fPIC -MD -MT -DANDROID
-set LIBS=-llog -lEGL -lGLESv3
+set LIBS=-landroid -llog -lEGL -lGLESv3
 set SOURCES=./src/native/native.c
 set INC_DIR=-I./src/native
 set LIB_DIR=

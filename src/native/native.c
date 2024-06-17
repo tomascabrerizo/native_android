@@ -1,5 +1,8 @@
+#include <assert.h>
+
 #include <jni.h>
 #include <GLES3/gl3.h>
+
 #include <android/log.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
@@ -43,9 +46,13 @@ unsigned int gpu_create_program(const char *vert_src, const char *frag_src) {
     return program;
 }
 
+jobject *asset_manager_ref   = 0;
+AAssetManager *asset_manager = 0;
+
 float vertices[] = { -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f,
                      0.0f,  1.0f,  0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,  1.0f };
 
+#if 0
 const char *vert_src = "#version 300 es\n"
                        "layout (location = 0) in vec3 aPos;\n"
                        "layout (location = 1) in vec3 aCol;\n"
@@ -64,6 +71,7 @@ const char *frag_src = "#version 300 es\n"
                        "{\n"
                        "   FragColor = vec4(Color, 1.0f);\n"
                        "}\n\0";
+#endif
 
 unsigned int program;
 unsigned int vao, vbo;
@@ -71,6 +79,12 @@ unsigned int vao, vbo;
 void gpu_init(void) {
     const char *version = (const char *)glGetString(GL_VERSION);
     logd("Game", "OpenGL initialized: %s", version);
+
+    AAsset *vert_asset = AAssetManager_open(asset_manager, "shader.vert", AASSET_MODE_BUFFER);
+    AAsset *frag_asset = AAssetManager_open(asset_manager, "shader.frag", AASSET_MODE_BUFFER);
+
+    char *vert_src = (char *)AAsset_getBuffer(vert_asset);
+    char *frag_src = (char *)AAsset_getBuffer(frag_asset);
 
     program = gpu_create_program(vert_src, frag_src);
 
@@ -110,9 +124,13 @@ void gpu_viewport(int x, int y, int w, int h) {
     glViewport(x, y, w, h);
 }
 
-JNIEXPORT void JNICALL Java_com_tomas_game_GameRenderer_gpuInit(JNIEnv *env, jobject *thiz) {
-    (void)env;
+JNIEXPORT void JNICALL Java_com_tomas_game_GameRenderer_gpuInit(JNIEnv *env, jobject *thiz,
+                                                                jobject *manager) {
     (void)thiz;
+    asset_manager_ref = (*env)->NewLocalRef(env, manager);
+    asset_manager     = AAssetManager_fromJava(env, asset_manager_ref);
+    assert(asset_manager_ref);
+    assert(asset_manager);
     gpu_init();
 }
 
