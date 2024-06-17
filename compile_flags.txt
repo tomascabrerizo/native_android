@@ -1,0 +1,11 @@
+Diagnostics:
+    UnusedIncludes: None
+
+-pedantic
+-Wall
+-Wextra
+-Werror
+-std=c11
+-g
+-IC:/andorid/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include
+-D_CRT_SECURE_NO_WARNINGS

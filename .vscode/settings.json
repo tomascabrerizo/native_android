@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\andorid\\platforms\\android-29\\android.jar"
+    ]
+}

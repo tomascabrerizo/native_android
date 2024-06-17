@@ -13,8 +13,8 @@ public final class R {
   }
   public static final class string {
     public static final int app_name=0x7f020000;
-    public static final int hello_msg=0x7f020001;
-    public static final int menu_settings=0x7f020002;
-    public static final int title_activity_main=0x7f020003;
+  }
+  public static final class style {
+    public static final int GameFullScreen=0x7f030000;
   }
 }
