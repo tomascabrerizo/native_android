@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <assert.h>
 
 #include <jni.h>
@@ -52,27 +53,6 @@ AAssetManager *asset_manager = 0;
 float vertices[] = { -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f,
                      0.0f,  1.0f,  0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,  1.0f };
 
-#if 0
-const char *vert_src = "#version 300 es\n"
-                       "layout (location = 0) in vec3 aPos;\n"
-                       "layout (location = 1) in vec3 aCol;\n"
-                       "out vec3 Color;\n"
-                       "void main()\n"
-                       "{\n"
-                       "    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-                       "    Color = aCol;"
-                       "}\0";
-
-const char *frag_src = "#version 300 es\n"
-                       "precision mediump float;\n"
-                       "out vec4 FragColor;\n"
-                       "in vec3 Color;\n"
-                       "void main()\n"
-                       "{\n"
-                       "   FragColor = vec4(Color, 1.0f);\n"
-                       "}\n\0";
-#endif
-
 unsigned int program;
 unsigned int vao, vbo;
 
@@ -107,7 +87,7 @@ void gpu_init(void) {
 }
 
 void gpu_render(void) {
-    glClearColor(0.2f, 0.5f, 0.7f, 0.0f);
+    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(program);
